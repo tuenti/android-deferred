@@ -15,3 +15,12 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile group: 'org.mockito', name: 'mockito-core', version: '1.10.8'
 }
+
+apply plugin: 'maven'
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+            authentication(userName: mavenUser, password: mavenPassword)
+        }
+    }
+}

@@ -11,7 +11,7 @@ buildscript {
 
 allprojects {
 
-    group = 'com.tuenti.deferred'
+    group = 'com.tuenti'
     version = '1.0.0'
 
     repositories {
