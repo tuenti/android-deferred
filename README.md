@@ -111,12 +111,49 @@ dm.when(p1, p2, p3)
   .fail(…)
 ```
 
-Or use `sequentiallyRunUntilFirstDone` to execute all promises until one is resolved:
+Or use `sequentiallyRunUntilFirstDone` to execute sequentially the promises until one is resolved:
 
+For this you must instantiate some objects implementing PromiseObjectTask<D, F, P>
+
+for example:
 ```java
-deferredManager.sequentiallyRunUntilFirstDone(this::getDataFromMemory,
-				this::getDataFromDisk,
-				this::getDataFromAPI)
+private PromiseObjectTask<Data, Exception, Void> getDataFromMemory() {
+	return new PromiseObjectTask<Data, Exception, Void>() {
+		@Override
+		public Promise<Data, Exception, Void> run() {
+			return inMemoryStorage.getData();
+		}
+	};
+}
+
+private PromiseObjectTask<Data, Exception, Void> getDataFromDisk() {
+	return new PromiseObjectTask<Data, Exception, Void>() {
+		@Override
+		public Promise<Data, Exception, Void> run() {
+			return diskStorage.getData();
+		}
+	};
+}
+
+private PromiseObjectTask<Data, Exception, Void> getDataFromAPI() {
+	return new PromiseObjectTask<Data, Exception, Void>() {
+		@Override
+		public Promise<Data, Exception, Void> run() {
+			return apiClientStorage.getData();
+		}
+	};
+}
+
+deferredManager.sequentiallyRunUntilFirstDone(getDataFromMemory(),
+				getDataFromDisk(),
+				getDataFromAPI());
+```
+
+or avoiding verbosity using lambdas or method references:
+```java
+deferredManager.sequentiallyRunUntilFirstDone(inMemoryStorage::getData,
+				diskStorage::getData,
+				apiClient::getData);
 ```
 
 Also, you can use `lazyAnd` or `lazyOr` to execute promises sequentially until the boolean condition is achieved.
