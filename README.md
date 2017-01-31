@@ -120,6 +120,7 @@ deferredManager.sequentiallyRunUntilFirstDone(this::getDataFromMemory,
 ```
 
 Also, you can use `lazyAnd` or `lazyOr` to execute promises sequentially until the boolean condition is achieved.
+
 --------
 
 ## How to add to your project
