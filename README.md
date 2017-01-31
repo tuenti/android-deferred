@@ -1,4 +1,4 @@
-# Deferred
+# Android-Deferred
 
 --------
 Deferred is a fork of Ray Tsang's [JDeferred](https://github.com/jdeferred/jdeferred) library inspired in [JQuery](https://github.com/jquery/jquery)
