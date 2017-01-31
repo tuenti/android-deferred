@@ -125,7 +125,7 @@ Also, you can use `lazyAnd` or `lazyOr` to execute promises sequentially until t
 
 ## How to add to your project
 
-Add `compile TODO` to your _build.gradle_ file.
+<!-- Add `compile TODO` to your _build.gradle_ file. -->
 
 The promises are created via a `DeferredFactory`, to create an instance of this class you should provide an implementation of `ExecutorProvider`, this class will is where you will tell Deferred in which pool you want to execute your code, for example:
 
